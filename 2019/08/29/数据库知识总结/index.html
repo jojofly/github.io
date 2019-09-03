@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hexo,nginx,阿里云,">
+  <meta name="keywords" content="数据库,sql,">
 
 
 
@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="test GitI write here!">
-<meta name="keywords" content="hexo,nginx,阿里云">
+<meta name="description" content="sql 单表查询条件查询    select 字段 from tablename where 字段 (not)in (元素1,2,3)；  ...  where 条件表达式1 and 条件表达式2；  ...  where 条件表达式1 or 条件表达式2；范围查询select 字段1，字段2  from tablename where 字段 (not) between x1 and x2去重查询">
+<meta name="keywords" content="数据库,sql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="阿里云CentOS+Hexo+Nginx建站心路历程">
-<meta property="og:url" content="http://yoursite.com/2019/08/24/阿里云linux-hexo-nginx/index.html">
+<meta property="og:title" content="数据库知识总结">
+<meta property="og:url" content="http://yoursite.com/2019/08/29/数据库知识总结/index.html">
 <meta property="og:site_name" content="lishuai&#39;s Hexo">
-<meta property="og:description" content="test GitI write here!">
+<meta property="og:description" content="sql 单表查询条件查询    select 字段 from tablename where 字段 (not)in (元素1,2,3)；  ...  where 条件表达式1 and 条件表达式2；  ...  where 条件表达式1 or 条件表达式2；范围查询select 字段1，字段2  from tablename where 字段 (not) between x1 and x2去重查询">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-25T03:34:53.528Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8061266-0cb6ecd1ac14baa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8061266-4b0feb5fca3be132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/228/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8061266-81e50d2cd4263b65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/282/format/webp">
+<meta property="og:updated_time" content="2019-08-29T11:41:45.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="阿里云CentOS+Hexo+Nginx建站心路历程">
-<meta name="twitter:description" content="test GitI write here!">
+<meta name="twitter:title" content="数据库知识总结">
+<meta name="twitter:description" content="sql 单表查询条件查询    select 字段 from tablename where 字段 (not)in (元素1,2,3)；  ...  where 条件表达式1 and 条件表达式2；  ...  where 条件表达式1 or 条件表达式2；范围查询select 字段1，字段2  from tablename where 字段 (not) between x1 and x2去重查询">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/8061266-0cb6ecd1ac14baa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp">
 
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/24/阿里云linux-hexo-nginx/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/29/数据库知识总结/">
 
 
 
 
 
-  <title>阿里云CentOS+Hexo+Nginx建站心路历程 | lishuai's Hexo</title>
+  <title>数据库知识总结 | lishuai's Hexo</title>
   
 
 
@@ -233,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/阿里云linux-hexo-nginx/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/数据库知识总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lishuai">
@@ -250,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">阿里云CentOS+Hexo+Nginx建站心路历程</h1>
+          <h1 class="post-title" itemprop="name headline">数据库知识总结</h1>
         
 
         <div class="post-meta">
@@ -262,8 +266,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-24T20:11:43+08:00">
-                2019-08-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T19:08:31+08:00">
+                2019-08-29
               </time>
             
 
@@ -285,19 +289,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
                   </a>
                 </span>
 
@@ -333,7 +326,35 @@
       
 
       
-        <h2 id="test-Git"><a href="#test-Git" class="headerlink" title="test Git"></a>test Git</h2><h3 id="I-write-here"><a href="#I-write-here" class="headerlink" title="I write here!"></a>I write here!</h3>
+        <h2 id="sql-单表查询"><a href="#sql-单表查询" class="headerlink" title="sql 单表查询"></a>sql 单表查询</h2><h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><pre><code>    select 字段 from tablename where 字段 (not)in (元素1,2,3)；
+
+...  where 条件表达式1 and 条件表达式2；
+
+...  where 条件表达式1 or 条件表达式2；</code></pre><h3 id="范围查询"><a href="#范围查询" class="headerlink" title="范围查询"></a>范围查询</h3><pre><code>select 字段1，字段2  from tablename where 字段 (not) between x1 and x2</code></pre><h3 id="去重查询"><a href="#去重查询" class="headerlink" title="去重查询"></a>去重查询</h3><pre><code>select distinct 字段 from tablename</code></pre><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><pre><code>select 字段1，字段2 from tablename order by 属性名[ASC|DESC]</code></pre><h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><pre><code>group by 
+group_concat(字段名)//只是将符合条件的字段名拼接在一起</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-0cb6ecd1ac14baa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp" alt="picture:"><br>查找每个部门有多少名在职员工</p>
+<pre><code>SELECT
+      dept_no as 部门,
+      count( emp_no) as 人数
+    FROM
+      dept_emp 
+    WHERE
+      to_date = &apos;9999-01-01&apos; 
+    GROUP BY
+      dept_no</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-4b0feb5fca3be132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/228/format/webp" alt="picture"></p>
+<p>   having 相当于 对group by 的对象筛选(功能类似于where)</p>
+<p>每个部门人数都有了，那如果我们想要进一步知道员工人数大于30000的部门是哪些，这个时候就得用到HAVING了</p>
+<pre><code>SELECT
+      dept_no as 部门,
+      count(emp_no) as 人数
+    FROM
+      dept_emp 
+    WHERE
+      to_date = &apos;9999-01-01&apos; 
+    GROUP BY
+      dept_no
+    HAVING
+        count(emp_no)&gt;30000</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-81e50d2cd4263b65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/282/format/webp" alt="picture"></p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2>
       
     </div>
     
@@ -350,11 +371,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
-          
-            <a href="/tags/阿里云/" rel="tag"># 阿里云</a>
+            <a href="/tags/sql/" rel="tag"># sql</a>
           
         </div>
       
@@ -367,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/24/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/08/24/阿里云linux-hexo-nginx/" rel="next" title="阿里云CentOS+Hexo+Nginx建站心路历程">
+                <i class="fa fa-chevron-left"></i> 阿里云CentOS+Hexo+Nginx建站心路历程
               </a>
             
           </div>
@@ -377,8 +396,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/29/数据库知识总结/" rel="prev" title="数据库知识总结">
-                数据库知识总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/03/数据库-一/" rel="prev" title="数据库(一)">
+                数据库(一) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -511,7 +530,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#test-Git"><span class="nav-number">1.</span> <span class="nav-text">test Git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-write-here"><span class="nav-number">1.1.</span> <span class="nav-text">I write here!</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-单表查询"><span class="nav-number">1.</span> <span class="nav-text">sql 单表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件查询"><span class="nav-number">1.1.</span> <span class="nav-text">条件查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围查询"><span class="nav-number">1.2.</span> <span class="nav-text">范围查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去重查询"><span class="nav-number">1.3.</span> <span class="nav-text">去重查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.4.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组查询"><span class="nav-number">1.5.</span> <span class="nav-text">分组查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多表查询"><span class="nav-number">2.</span> <span class="nav-text">多表查询</span></a></li></ol></div>
             
 
           </div>
