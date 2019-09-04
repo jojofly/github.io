@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据库,sql,">
+  <meta name="keywords" content="sql,数据库,">
 
 
 
@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="sql 单表查询条件查询    select 字段 from tablename where 字段 (not)in (元素1,2,3)；  ...  where 条件表达式1 and 条件表达式2；  ...  where 条件表达式1 or 条件表达式2；范围查询select 字段1，字段2  from tablename where 字段 (not) between x1 and x2去重查询">
-<meta name="keywords" content="数据库,sql">
+<meta name="description" content="SQL 基本语法操作SQL简介SQL 是一门 ANSI 的标准计算机语言，用来访问和操作数据库系统。SQL 语句用于取回和更新数据库中的数据。 RDBMS RDBMS指的是关系型数据库管理系统 它是SQL的基础，也是所有现代数据库的基础，常见的有MS SQL Server, IBM DB2, Oracle, MySQL 以及 Microsoft Access。  SQL 语言的分类 数据操作语言">
+<meta name="keywords" content="sql,数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库知识总结">
-<meta property="og:url" content="http://yoursite.com/2019/08/29/数据库知识总结/index.html">
+<meta property="og:title" content="数据库(三)">
+<meta property="og:url" content="http://yoursite.com/2019/09/03/数据库-三/index.html">
 <meta property="og:site_name" content="lishuai&#39;s Hexo">
-<meta property="og:description" content="sql 单表查询条件查询    select 字段 from tablename where 字段 (not)in (元素1,2,3)；  ...  where 条件表达式1 and 条件表达式2；  ...  where 条件表达式1 or 条件表达式2；范围查询select 字段1，字段2  from tablename where 字段 (not) between x1 and x2去重查询">
+<meta property="og:description" content="SQL 基本语法操作SQL简介SQL 是一门 ANSI 的标准计算机语言，用来访问和操作数据库系统。SQL 语句用于取回和更新数据库中的数据。 RDBMS RDBMS指的是关系型数据库管理系统 它是SQL的基础，也是所有现代数据库的基础，常见的有MS SQL Server, IBM DB2, Oracle, MySQL 以及 Microsoft Access。  SQL 语言的分类 数据操作语言">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8061266-0cb6ecd1ac14baa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8061266-4b0feb5fca3be132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/228/format/webp">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8061266-81e50d2cd4263b65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/282/format/webp">
-<meta property="og:updated_time" content="2019-08-29T11:41:45.963Z">
+<meta property="og:updated_time" content="2019-09-03T11:43:43.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库知识总结">
-<meta name="twitter:description" content="sql 单表查询条件查询    select 字段 from tablename where 字段 (not)in (元素1,2,3)；  ...  where 条件表达式1 and 条件表达式2；  ...  where 条件表达式1 or 条件表达式2；范围查询select 字段1，字段2  from tablename where 字段 (not) between x1 and x2去重查询">
+<meta name="twitter:title" content="数据库(三)">
+<meta name="twitter:description" content="SQL 基本语法操作SQL简介SQL 是一门 ANSI 的标准计算机语言，用来访问和操作数据库系统。SQL 语句用于取回和更新数据库中的数据。 RDBMS RDBMS指的是关系型数据库管理系统 它是SQL的基础，也是所有现代数据库的基础，常见的有MS SQL Server, IBM DB2, Oracle, MySQL 以及 Microsoft Access。  SQL 语言的分类 数据操作语言">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/8061266-0cb6ecd1ac14baa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp">
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/29/数据库知识总结/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/03/数据库-三/">
 
 
 
 
 
-  <title>数据库知识总结 | lishuai's Hexo</title>
+  <title>数据库(三) | lishuai's Hexo</title>
   
 
 
@@ -237,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/数据库知识总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/数据库-三/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lishuai">
@@ -254,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库知识总结</h1>
+          <h1 class="post-title" itemprop="name headline">数据库(三)</h1>
         
 
         <div class="post-meta">
@@ -266,8 +266,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T19:08:31+08:00">
-                2019-08-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-03T19:42:32+08:00">
+                2019-09-03
               </time>
             
 
@@ -289,8 +289,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -326,11 +326,58 @@
       
 
       
-        <h2 id="sql-单表查询"><a href="#sql-单表查询" class="headerlink" title="sql 单表查询"></a>sql 单表查询</h2><h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><pre><code>    select 字段 from tablename where 字段 (not)in (元素1,2,3)；
+        <h1 id="SQL-基本语法操作"><a href="#SQL-基本语法操作" class="headerlink" title="SQL 基本语法操作"></a>SQL 基本语法操作</h1><h2 id="SQL简介"><a href="#SQL简介" class="headerlink" title="SQL简介"></a>SQL简介</h2><p>SQL 是一门 ANSI 的标准计算机语言，用来访问和操作数据库系统。SQL 语句用于取回和更新数据库中的数据。</p>
+<h2 id="RDBMS"><a href="#RDBMS" class="headerlink" title="RDBMS"></a>RDBMS</h2><ul>
+<li>RDBMS指的是关系型数据库管理系统</li>
+<li>它是SQL的基础，也是所有现代数据库的基础，常见的有MS SQL Server, IBM DB2, Oracle, MySQL 以及 Microsoft Access。</li>
+</ul>
+<h2 id="SQL-语言的分类"><a href="#SQL-语言的分类" class="headerlink" title="SQL 语言的分类"></a>SQL 语言的分类</h2><ul>
+<li>数据操作语言 (DML)<ul>
+<li>UPDATE - 更新数据库表中的数据</li>
+<li>DELETE - 从数据库表中删除数据</li>
+<li>INSERT INTO 向数据库表中插入数据</li>
+</ul>
+</li>
+<li>数据定义语言 (DDL)<ul>
+<li>CREATE TABLE/VIEW/INDEX/SYN/CLUSTER</li>
+</ul>
+</li>
+<li>数据库查询语言 (DQL)<ul>
+<li>SELECT &lt;字段名表&gt;<br>FROM &lt;表或视图名&gt;<br>WHERE &lt;查询条件&gt;</li>
+</ul>
+</li>
+<li>数据库控制语言 (DCL)<ul>
+<li>GRANT：授权</li>
+<li>ROLLBACK [WORK] TO [SAVEPOINT]:回滚</li>
+</ul>
+</li>
+</ul>
+<h2 id="SQL-单表查询"><a href="#SQL-单表查询" class="headerlink" title="SQL 单表查询"></a>SQL 单表查询</h2><h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><pre><code>    select 字段 from tablename where 字段 (not)in (元素1,2,3)；
 
 ...  where 条件表达式1 and 条件表达式2；
 
-...  where 条件表达式1 or 条件表达式2；</code></pre><h3 id="范围查询"><a href="#范围查询" class="headerlink" title="范围查询"></a>范围查询</h3><pre><code>select 字段1，字段2  from tablename where 字段 (not) between x1 and x2</code></pre><h3 id="去重查询"><a href="#去重查询" class="headerlink" title="去重查询"></a>去重查询</h3><pre><code>select distinct 字段 from tablename</code></pre><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><pre><code>select 字段1，字段2 from tablename order by 属性名[ASC|DESC]</code></pre><h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><pre><code>group by 
+...  where 条件表达式1 or 条件表达式2；</code></pre><h3 id="范围查询"><a href="#范围查询" class="headerlink" title="范围查询"></a>范围查询</h3><pre><code>select 字段1，字段2  from tablename where 字段 (not) between x1 and x2
+
+select 字段1，字段2  from tablename where 字段 (not) in (x1,x2,...,xn)</code></pre><h3 id="去重查询"><a href="#去重查询" class="headerlink" title="去重查询"></a>去重查询</h3><pre><code>select distinct 字段 from tablename</code></pre><h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><pre><code> select 字段 from tablename  where 字段 like 条件
+
+% 代替任意str
+_ 代替一个char
+[charlist] : [a,b,c] 字符中含有a or b or c
+[^charlist] : 与上面对应</code></pre><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><pre><code>select 字段1，字段2 from tablename order by 属性名[ASC默认|DESC]</code></pre><h3 id="带有函数的查询"><a href="#带有函数的查询" class="headerlink" title="带有函数的查询"></a>带有函数的查询</h3><ul>
+<li><p>AVG (平均)</p>
+</li>
+<li><p>COUNT (计数)</p>
+</li>
+<li><p>MAX (最大值)</p>
+</li>
+<li><p>MIN (最小值)</p>
+</li>
+<li><p>SUM (总合)</p>
+<p>例：</p>
+<p>select MAX(字段) from tablename</p>
+</li>
+</ul>
+<h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><pre><code>  group by 
 group_concat(字段名)//只是将符合条件的字段名拼接在一起</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-0cb6ecd1ac14baa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp" alt="picture:"><br>查找每个部门有多少名在职员工</p>
 <pre><code>SELECT
       dept_no as 部门,
@@ -354,6 +401,146 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
       dept_no
     HAVING
         count(emp_no)&gt;30000</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-81e50d2cd4263b65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/282/format/webp" alt="picture"></p>
+<h3 id="表连接"><a href="#表连接" class="headerlink" title="表连接"></a>表连接</h3><p> 关于inner join， left join，right join：</p>
+<h4 id="举例如下："><a href="#举例如下：" class="headerlink" title="举例如下："></a>举例如下：</h4><hr>
+<p>表A记录如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">aID</th>
+<th align="center">aNum</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">a20050111</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">a20050112</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">a20050113</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">a20050114</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">a20050115</td>
+</tr>
+</tbody></table>
+<p>表B记录如下:</p>
+<table>
+<thead>
+<tr>
+<th align="center">bID</th>
+<th align="center">bName</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">2006032401</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">2006032402</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">2006032403</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">2006032404</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">2006032408</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="1-inner-join"><a href="#1-inner-join" class="headerlink" title="1.inner join"></a>1.inner join</h4><pre><code>select * from a inner join B on a.aID=b.bID;</code></pre><p>结果如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">aID</th>
+<th align="center">aNum</th>
+<th align="center">biD</th>
+<th align="center">bName</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">a20050111</td>
+<td align="center">1</td>
+<td align="center">2006032401</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">a20050112</td>
+<td align="center">2</td>
+<td align="center">2006032402</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">a20050113</td>
+<td align="center">3</td>
+<td align="center">2006032403</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">a20050114</td>
+<td align="center">4</td>
+<td align="center">2006032404</td>
+</tr>
+</tbody></table>
+<p>结果说明:<br>很明显,这里只显示出了 A.aID = B.bID的记录.这说明inner join并不以谁为基础,它只显示符合条件的记录.</p>
+<h4 id="2-left-join"><a href="#2-left-join" class="headerlink" title="2.left join"></a>2.left join</h4><pre><code>select * from A left join B on A.aID = B.bID</code></pre><p>结果如下:</p>
+<table>
+<thead>
+<tr>
+<th align="center">aID</th>
+<th align="center">aNum</th>
+<th align="center">biD</th>
+<th align="center">bName</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">a20050111</td>
+<td align="center">1</td>
+<td align="center">2006032401</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">a20050112</td>
+<td align="center">2</td>
+<td align="center">2006032402</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">a20050113</td>
+<td align="center">3</td>
+<td align="center">2006032403</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">a20050114</td>
+<td align="center">4</td>
+<td align="center">2006032404</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">a20050115</td>
+<td align="center">NULL</td>
+<td align="center">NULL</td>
+</tr>
+</tbody></table>
+<p>结果说明:<br>left join是以A表的记录为基础的,A可以看成左表,B可以看成右表,left join是以左表为准的.<br>换句话说,左表(A)的记录将会全部表示出来,而右表(B)只会显示符合搜索条件的记录(例子中为: A.aID = B.bID).<br>B表记录不足的地方均为NULL.</p>
+<p>注：right join和left join的结果刚好相反,这次是以右表(B)为基础的,A表不足的地方用NULL填充.</p>
 <h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2>
       
     </div>
@@ -371,9 +558,9 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
       
         <div class="post-tags">
           
-            <a href="/tags/数据库/" rel="tag"># 数据库</a>
-          
             <a href="/tags/sql/" rel="tag"># sql</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
           
         </div>
       
@@ -386,8 +573,8 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/24/阿里云linux-hexo-nginx/" rel="next" title="阿里云CentOS+Hexo+Nginx建站心路历程">
-                <i class="fa fa-chevron-left"></i> 阿里云CentOS+Hexo+Nginx建站心路历程
+              <a href="/2019/09/03/数据库-二/" rel="next" title="数据库(二)">
+                <i class="fa fa-chevron-left"></i> 数据库(二)
               </a>
             
           </div>
@@ -396,8 +583,8 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/03/数据库-一/" rel="prev" title="数据库(一)">
-                数据库(一) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/03/数据库-四/" rel="prev" title="数据库(四)">
+                数据库(四) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -475,7 +662,7 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -497,7 +684,7 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -530,7 +717,7 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-单表查询"><span class="nav-number">1.</span> <span class="nav-text">sql 单表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件查询"><span class="nav-number">1.1.</span> <span class="nav-text">条件查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围查询"><span class="nav-number">1.2.</span> <span class="nav-text">范围查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去重查询"><span class="nav-number">1.3.</span> <span class="nav-text">去重查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.4.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组查询"><span class="nav-number">1.5.</span> <span class="nav-text">分组查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多表查询"><span class="nav-number">2.</span> <span class="nav-text">多表查询</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL-基本语法操作"><span class="nav-number">1.</span> <span class="nav-text">SQL 基本语法操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL简介"><span class="nav-number">1.1.</span> <span class="nav-text">SQL简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDBMS"><span class="nav-number">1.2.</span> <span class="nav-text">RDBMS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-语言的分类"><span class="nav-number">1.3.</span> <span class="nav-text">SQL 语言的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-单表查询"><span class="nav-number">1.4.</span> <span class="nav-text">SQL 单表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件查询"><span class="nav-number">1.4.1.</span> <span class="nav-text">条件查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围查询"><span class="nav-number">1.4.2.</span> <span class="nav-text">范围查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去重查询"><span class="nav-number">1.4.3.</span> <span class="nav-text">去重查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模糊查询"><span class="nav-number">1.4.4.</span> <span class="nav-text">模糊查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.4.5.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带有函数的查询"><span class="nav-number">1.4.6.</span> <span class="nav-text">带有函数的查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组查询"><span class="nav-number">1.4.7.</span> <span class="nav-text">分组查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表连接"><span class="nav-number">1.4.8.</span> <span class="nav-text">表连接</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#举例如下："><span class="nav-number">1.4.8.1.</span> <span class="nav-text">举例如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-inner-join"><span class="nav-number">1.4.8.2.</span> <span class="nav-text">1.inner join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-left-join"><span class="nav-number">1.4.8.3.</span> <span class="nav-text">2.left join</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多表查询"><span class="nav-number">1.5.</span> <span class="nav-text">多表查询</span></a></li></ol></li></ol></div>
             
 
           </div>

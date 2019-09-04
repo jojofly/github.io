@@ -232,6 +232,869 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/数据库-四/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lishuai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lishuai's Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/03/数据库-四/" itemprop="url">数据库(四)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-03T19:44:07+08:00">
+                2019-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>N TRANSACTION；<br>    COMMIT；<br>    ROLLBACK；</p>
+<h2 id="2-事务的4个特性：ACID性"><a href="#2-事务的4个特性：ACID性" class="headerlink" title="2.事务的4个特性：ACID性"></a>2.事务的4个特性：ACID性</h2><ul>
+<li><p>原子性（Atomicity）：事务中应用中的最小的执行单位。（最小的个体，不能拆分）</p>
+</li>
+<li><p>一致性（Consistency）：事务执行的结果，必须使数据库从一个一致性状态，变成另一个一致性状态。一致性由原子性来保证的。（最形象的例子就是转账问题，A给B转账，A账户钱变少，B账户钱变多，必须是这样）</p>
+</li>
+<li><p>隔离性（Isolation）；各个事务之间的执行互不干扰，任意一个事务内部的操作对其他并发的事务是隔离的。</p>
+</li>
+<li><p>持续性（Durability）：持续性也成为持久性，指事务一旦提交，对数据库的操作就执行，并且记录下来了，以及保存到了物理数据库中。</p>
+</li>
+<li><h2 id="3-事务基本操作"><a href="#3-事务基本操作" class="headerlink" title="3. 事务基本操作"></a>3. 事务基本操作</h2><p>Mysql默认关闭了事务，开启了autocommit 这就导致我们的每一条sql语句都是一个独立的事务，提交之后不可改变，不可回滚。</p>
+<p>  //开启事务<br>  mysql&gt; set autocommit=0;<br>  Query OK, 0 rows affected (0.00 sec)</p>
+<p>  mysql&gt; select @@autocommit;<br>  +————–+<br>  | @@autocommit |<br>  +————–+<br>  |            0 |<br>  +————–+<br>  1 row in set (0.00 sec)</p>
+<p>  //插入b的转账记录<br>  mysql&gt; insert into user values(2,’b’,1000);<br>  Query OK, 1 row affected (0.01 sec)<br>  mysql&gt; select * from user;<br>  +—-+——+——-+<br>  | id | name | money |<br>  +—-+——+——-+<br>  |  1 | a    |  1000 |<br>  |  2 | b    |  1000 |<br>  +—-+——+——-+<br>  2 rows in set (0.00 sec)</p>
+<p>  mysql&gt; rollback;<br>  Query OK, 0 rows affected (0.14 sec)</p>
+<p>  mysql&gt; select * from user;<br>  +—-+——+——-+<br>  | id | name | money |<br>  +—-+——+——-+<br>  |  1 | a    |  1000 |<br>  +—-+——+——-+<br>  1 row in set (0.00 sec)</p>
+<p>  //此时rollback就生效了</p>
+<p>  //再一次插入数据<br>  mysql&gt; insert into user values(2,’b’,1000);<br>  Query OK, 1 row affected (0.15 sec)<br>  //手动提交数据<br>  mysql&gt; commit;<br>  Query OK, 0 rows affected (0.04 sec)</p>
+<p>  //再撤销便失效了（体现了事务的持久性，事务一旦提交，就不能回滚了，也就是当前的这个事务在提交的时候就结束了）<br>  mysql&gt; rollback;<br>  Query OK, 0 rows affected (0.00 sec)</p>
+<p>  mysql&gt; select * from user;<br>  +—-+——+——-+<br>  | id | name | money |<br>  +—-+——+——-+<br>  |  1 | a    |  1000 |<br>  |  2 | b    |  1000 |<br>  +—-+——+——-+<br>  2 rows in set (0.00 sec)</p>
+</li>
+</ul>
+<p>比如我们想要实现a转账给b 100RMB</p>
+<p>有两步操作：</p>
+<pre><code>begin；
+
+update user set money=money-100 where name=&apos;a&apos;;
+
+update user set money=money+100 where name=&apos;b&apos;;</code></pre><p>我们将上面两步操作放在一个事务之中，当我们执行rollback时，两步操作全部回滚</p>
+<pre><code>mysql&gt; begin;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt;
+mysql&gt; update user set money=money-100 where name=&apos;a&apos;;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql&gt;
+mysql&gt; update user set money=money+100 where name=&apos;b&apos;;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql&gt; select * from user;
++----+------+-------+
+| id | name | money |
++----+------+-------+
+|  1 | a    |   900 |
+|  2 | b    |  1100 |
++----+------+-------+
+2 rows in set (0.00 sec)
+
+mysql&gt; rollback;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql&gt; select * from user;
++----+------+-------+
+| id | name | money |
++----+------+-------+
+|  1 | a    |  1000 |
+|  2 | b    |  1000 |
++----+------+-------+
+2 rows in set (0.00 sec)</code></pre><h2 id="4-事务的隔离级别以及出现的问题"><a href="#4-事务的隔离级别以及出现的问题" class="headerlink" title="4. 事务的隔离级别以及出现的问题"></a>4. 事务的隔离级别以及出现的问题</h2><p>MySQL数据库为我们提供的四种隔离级别：</p>
+<ol>
+<li>Read uncommitted (读未提交)：最低级别，任何情况都无法保证。</li>
+<li>Read committed (读已提交)：可避免脏读的发生。</li>
+<li>Repeatable read (可重复读)：可避免脏读、不可重复读的发生。</li>
+<li>Serializable (串行化)：可避免脏读、不可重复读、幻读的发生。</li>
+<li></li>
+</ol>
+<h3 id="1-read-uncommitted-最低级别的隔离-–-脏读"><a href="#1-read-uncommitted-最低级别的隔离-–-脏读" class="headerlink" title="1.  read uncommitted(最低级别的隔离) – 脏读"></a>1.  read uncommitted(最低级别的隔离) – 脏读</h3><p>脏读是指在一个事务处理过程里读取了另一个未提交的事务中的数据。</p>
+<p>　　当一个事务正在多次修改某个数据，而在这个事务中这多次的修改都还未提交，这时一个并发的事务来访问该数据，就会造成两个事务得到的数据不一致。例如：用户A向用户B转账100元，对应SQL命令如下</p>
+<pre><code>update account set money=money - 100 where name=’A’;
+
+update account set money=money + 100 where name=’B’;  (此时A通知B)
+
+//此时B查看转账记录，确实是到账了
+mysql&gt; select * from user;
++----+------+-------+
+| id | name | money |
++----+------+-------+
+|  1 | a    |   900 |
+|  2 | b    |  1100 |
++----+------+-------+
+2 rows in set (0.00 sec)
+
+//但是此时B高高兴兴准备去tx氪金，然后：
+// A rollback
+//即B读取的数据是A还没有commit的数据，这就造成了脏读</code></pre><h3 id="2-read-committed-–-不可重复读"><a href="#2-read-committed-–-不可重复读" class="headerlink" title="2. read committed – 不可重复读"></a>2. read committed – 不可重复读</h3><p>一个事务开始时，只能看见已经提交的事务所做的修改。换句话说，一个事务从开始直到提交之前，所做的任何修改对其他事务都是不可见的。但是两次执行同样的查询，可能会得到不一样的结果。</p>
+<p>A在查询同一数据两次的结果不一样，原因是两次查询之间有其他事务对数据进行了修改。</p>
+<h3 id="3-repeatable-read-–-幻读"><a href="#3-repeatable-read-–-幻读" class="headerlink" title="3. repeatable read – 幻读"></a>3. repeatable read – 幻读</h3><p>   指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务想要插入相同记录时，报错： Duplicate entry ‘somenum’ for key ‘PRIMARY’ 会产生幻行。</p>
+<pre><code>实验users表如下：
+
+/*
++----+------+--------+
+| id | name | money  |
++----+------+--------+
+| 1  |   a  | 1000.0 |
+| 2  |   b  |    0.0 |
++----+------+--------+
+*/
+
+A ：
+begin；
+//正准备插入数据insert into users values(2,&apos;c&apos;,1000);
+
+//此时B开始事务：
+begin；
+insert into users values(2,&apos;c&apos;,1000);
+commit;
+
+//这时A开始继续事务
+select * from users;
+没有id = 3的记录，然而执行insert语句后报错
+//B跟见了鬼一样，仿佛出现了幻觉</code></pre><h3 id="4-serializable-串行化"><a href="#4-serializable-串行化" class="headerlink" title="4. serializable; 串行化"></a>4. serializable; 串行化</h3><p>就是以锁表的方式(类似于Java多线程中的锁)使得其他的线程只能在锁外等待，所以平时选用何种隔离级别应该根据实际情况，当A在执行事务时，不可有并行执行的事务。</p>
+<h2 id="5-锁的基本概念"><a href="#5-锁的基本概念" class="headerlink" title="5. 锁的基本概念"></a>5. 锁的基本概念</h2><p>封锁是实现并发的控制的一个重要的技术</p>
+<ul>
+<li>排他锁 又称 写锁。<br>  若事务T对A对象加上了X锁，那么只允许T可以对A进行读写操作，其他事务不可对A加锁，只能等待T释放对A的锁。<ul>
+<li>共享锁 又称读锁。<br>若事务T对A对象加上了S锁，那么T只能够对A进行对操作，同时其他的事务只能够对A加上S锁，不可对A加上X锁。即其他事务可以对A进行读取操作，但是无法对A进行修改。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-封锁协议"><a href="#1-封锁协议" class="headerlink" title="1. 封锁协议"></a>1. 封锁协议</h4><ul>
+<li><p>一级封锁协议<br>事务T在修改A之前必须先对A上X锁，并且事务结束之后才可以进行释放。<br>这样可以防止出现数据丢失现象</p>
+</li>
+<li><p>二级封锁协议<br>在一级封锁协议的基础上增加了，当T要读取A时必须要对A加S锁，读取完成之后释放S锁。<br>这样当T在修改A时，其他事务B读取A需要上S锁，但是A的X锁限制，导致事务B无法上S锁，按照协议便不能够读取A的数据，直到T事务结束释放锁为止，这避免了脏读的问题。但不能避免不可重读问题，因为在两次读取操作之前(存在于同一个事务之中)，第一次读取结束便释放S锁，若此时有事务修改了A的数据，再次读取A的数据便不一致。</p>
+</li>
+<li><p>三级封锁协议<br>在一级封锁协议的基础上增加了，当T要读取A时必须要对A加S锁，事务完成后释放S锁。<br>这样当T在修改A时，其他事务B读取A需要上S锁，但是A的X锁限制，导致事务B无法上S锁，按照协议便不能够读取A的数据，直到T事务结束释放锁为止，这避免了脏读的问题。同时对于之前二级封锁提到的例子中，在两个读取操作之间，不能够有其他事务进行写操作，所以三级封锁协议解决了不可重读的问题。</p>
+</li>
+</ul>
+<h4 id="2-活锁和死锁"><a href="#2-活锁和死锁" class="headerlink" title="2. 活锁和死锁"></a>2. 活锁和死锁</h4><ol>
+<li>活锁<br>事务T1 要对 A 进行操作，封锁了A，事务T2请求封锁A,等待T1完成，事务T3又来请求封锁A，等待…然后T4又来，当T1完成后，会出现这种情况：T3抢占封锁了A，之后T4抢占封锁了A，导致T2永远不能进行任务，永远在等待状态中。<ol start="2">
+<li>死锁<br>事务T1 封锁了R1，事务T2封锁了R2，此时T1需要R2的资源，请求封锁R2，好巧不巧，T2也要封锁R1,但是两者都要等待对方的锁释放，便导致了两个事务永远不能结束，形成了死锁。</li>
+</ol>
+</li>
+</ol>
+<p>:</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/数据库-三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lishuai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lishuai's Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/03/数据库-三/" itemprop="url">数据库(三)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-03T19:42:32+08:00">
+                2019-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SQL-基本语法操作"><a href="#SQL-基本语法操作" class="headerlink" title="SQL 基本语法操作"></a>SQL 基本语法操作</h1><h2 id="SQL简介"><a href="#SQL简介" class="headerlink" title="SQL简介"></a>SQL简介</h2><p>SQL 是一门 ANSI 的标准计算机语言，用来访问和操作数据库系统。SQL 语句用于取回和更新数据库中的数据。</p>
+<h2 id="RDBMS"><a href="#RDBMS" class="headerlink" title="RDBMS"></a>RDBMS</h2><ul>
+<li>RDBMS指的是关系型数据库管理系统</li>
+<li>它是SQL的基础，也是所有现代数据库的基础，常见的有MS SQL Server, IBM DB2, Oracle, MySQL 以及 Microsoft Access。</li>
+</ul>
+<h2 id="SQL-语言的分类"><a href="#SQL-语言的分类" class="headerlink" title="SQL 语言的分类"></a>SQL 语言的分类</h2><ul>
+<li>数据操作语言 (DML)<ul>
+<li>UPDATE - 更新数据库表中的数据</li>
+<li>DELETE - 从数据库表中删除数据</li>
+<li>INSERT INTO 向数据库表中插入数据</li>
+</ul>
+</li>
+<li>数据定义语言 (DDL)<ul>
+<li>CREATE TABLE/VIEW/INDEX/SYN/CLUSTER</li>
+</ul>
+</li>
+<li>数据库查询语言 (DQL)<ul>
+<li>SELECT &lt;字段名表&gt;<br>FROM &lt;表或视图名&gt;<br>WHERE &lt;查询条件&gt;</li>
+</ul>
+</li>
+<li>数据库控制语言 (DCL)<ul>
+<li>GRANT：授权</li>
+<li>ROLLBACK [WORK] TO [SAVEPOINT]:回滚</li>
+</ul>
+</li>
+</ul>
+<h2 id="SQL-单表查询"><a href="#SQL-单表查询" class="headerlink" title="SQL 单表查询"></a>SQL 单表查询</h2><h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><pre><code>    select 字段 from tablename where 字段 (not)in (元素1,2,3)；
+
+...  where 条件表达式1 and 条件表达式2；
+
+...  where 条件表达式1 or 条件表达式2；</code></pre><h3 id="范围查询"><a href="#范围查询" class="headerlink" title="范围查询"></a>范围查询</h3><pre><code>select 字段1，字段2  from tablename where 字段 (not) between x1 and x2
+
+select 字段1，字段2  from tablename where 字段 (not) in (x1,x2,...,xn)</code></pre><h3 id="去重查询"><a href="#去重查询" class="headerlink" title="去重查询"></a>去重查询</h3><pre><code>select distinct 字段 from tablename</code></pre><h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><pre><code> select 字段 from tablename  where 字段 like 条件
+
+% 代替任意str
+_ 代替一个char
+[charlist] : [a,b,c] 字符中含有a or b or c
+[^charlist] : 与上面对应</code></pre><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><pre><code>select 字段1，字段2 from tablename order by 属性名[ASC默认|DESC]</code></pre><h3 id="带有函数的查询"><a href="#带有函数的查询" class="headerlink" title="带有函数的查询"></a>带有函数的查询</h3><ul>
+<li><p>AVG (平均)</p>
+</li>
+<li><p>COUNT (计数)</p>
+</li>
+<li><p>MAX (最大值)</p>
+</li>
+<li><p>MIN (最小值)</p>
+</li>
+<li><p>SUM (总合)</p>
+<p>例：</p>
+<p>select MAX(字段) from tablename</p>
+</li>
+</ul>
+<h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><pre><code>  group by 
+group_concat(字段名)//只是将符合条件的字段名拼接在一起</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-0cb6ecd1ac14baa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp" alt="picture:"><br>查找每个部门有多少名在职员工</p>
+<pre><code>SELECT
+      dept_no as 部门,
+      count( emp_no) as 人数
+    FROM
+      dept_emp 
+    WHERE
+      to_date = &apos;9999-01-01&apos; 
+    GROUP BY
+      dept_no</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-4b0feb5fca3be132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/228/format/webp" alt="picture"></p>
+<p>   having 相当于 对group by 的对象筛选(功能类似于where)</p>
+<p>每个部门人数都有了，那如果我们想要进一步知道员工人数大于30000的部门是哪些，这个时候就得用到HAVING了</p>
+<pre><code>SELECT
+      dept_no as 部门,
+      count(emp_no) as 人数
+    FROM
+      dept_emp 
+    WHERE
+      to_date = &apos;9999-01-01&apos; 
+    GROUP BY
+      dept_no
+    HAVING
+        count(emp_no)&gt;30000</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-81e50d2cd4263b65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/282/format/webp" alt="picture"></p>
+<h3 id="表连接"><a href="#表连接" class="headerlink" title="表连接"></a>表连接</h3><p> 关于inner join， left join，right join：</p>
+<h4 id="举例如下："><a href="#举例如下：" class="headerlink" title="举例如下："></a>举例如下：</h4><hr>
+<p>表A记录如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">aID</th>
+<th align="center">aNum</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">a20050111</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">a20050112</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">a20050113</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">a20050114</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">a20050115</td>
+</tr>
+</tbody></table>
+<p>表B记录如下:</p>
+<table>
+<thead>
+<tr>
+<th align="center">bID</th>
+<th align="center">bName</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">2006032401</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">2006032402</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">2006032403</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">2006032404</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">2006032408</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="1-inner-join"><a href="#1-inner-join" class="headerlink" title="1.inner join"></a>1.inner join</h4><pre><code>select * from a inner join B on a.aID=b.bID;</code></pre><p>结果如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">aID</th>
+<th align="center">aNum</th>
+<th align="center">biD</th>
+<th align="center">bName</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">a20050111</td>
+<td align="center">1</td>
+<td align="center">2006032401</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">a20050112</td>
+<td align="center">2</td>
+<td align="center">2006032402</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">a20050113</td>
+<td align="center">3</td>
+<td align="center">2006032403</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">a20050114</td>
+<td align="center">4</td>
+<td align="center">2006032404</td>
+</tr>
+</tbody></table>
+<p>结果说明:<br>很明显,这里只显示出了 A.aID = B.bID的记录.这说明inner join并不以谁为基础,它只显示符合条件的记录.</p>
+<h4 id="2-left-join"><a href="#2-left-join" class="headerlink" title="2.left join"></a>2.left join</h4><pre><code>select * from A left join B on A.aID = B.bID</code></pre><p>结果如下:</p>
+<table>
+<thead>
+<tr>
+<th align="center">aID</th>
+<th align="center">aNum</th>
+<th align="center">biD</th>
+<th align="center">bName</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">a20050111</td>
+<td align="center">1</td>
+<td align="center">2006032401</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">a20050112</td>
+<td align="center">2</td>
+<td align="center">2006032402</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">a20050113</td>
+<td align="center">3</td>
+<td align="center">2006032403</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">a20050114</td>
+<td align="center">4</td>
+<td align="center">2006032404</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">a20050115</td>
+<td align="center">NULL</td>
+<td align="center">NULL</td>
+</tr>
+</tbody></table>
+<p>结果说明:<br>left join是以A表的记录为基础的,A可以看成左表,B可以看成右表,left join是以左表为准的.<br>换句话说,左表(A)的记录将会全部表示出来,而右表(B)只会显示符合搜索条件的记录(例子中为: A.aID = B.bID).<br>B表记录不足的地方均为NULL.</p>
+<p>注：right join和left join的结果刚好相反,这次是以右表(B)为基础的,A表不足的地方用NULL填充.</p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/数据库-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lishuai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lishuai's Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/03/数据库-二/" itemprop="url">数据库(二)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-03T19:39:48+08:00">
+                2019-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h1><p>关系模型由关系数据结构、关系操作集合和关系完整性约束三部分组成。</p>
+<h2 id="1-关系结构-longrightarrow-我们所说的表"><a href="#1-关系结构-longrightarrow-我们所说的表" class="headerlink" title="1.关系结构$\longrightarrow$ 我们所说的表"></a>1.关系结构<code>$\longrightarrow$</code> 我们所说的表</h2><ol>
+<li><p>域：域是一组具有相同数据类型的值的集合。</p>
+</li>
+<li><p>笛卡尔积：</p>
+<blockquote>
+<p>在数学中，两个集合X和Y的笛卡尓积（Cartesian product），又称直积，表示为X × Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。</p>
+</blockquote>
+<p> <strong>假设集合A={a, b}，集合B={0, 1, 2}，则两个集合的笛卡尔积为{(a, 0), (a, 1), (a, 2), (b, 0), (b, 1), (b, 2)}。</strong></p>
+<p> <strong>其中的每一个(x ，y)称为元组，每个x，y称为分量。基数(一个域允许的不同取值个数称为这个域的基数)对应的是当前域的基数，A集合含有两个不同的取值，A域的基数为2，B域的基数为3，A X B 的笛卡尔积可看作是一张表，共有元组 2 X 3 = 6 个元组</strong>。</p>
+<p> 关系是笛卡儿积的有限子集,比如在上述的6个元组中任选几个组成新的子集，就称作在域A,B上的关系。</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>若关系中的某一属性组的值能唯一地标识一个元组，而其子集不能，则称该属性组为候选码。</p>
+</li>
+<li><p>若一个关系有多个候选码，则选定其中一个为主码。</p>
+</li>
+<li><p>候选码的诸属性称为主属性。不包含在任何候选码中的属性称为非主属性或非码属性。</p>
+</li>
+<li><p>在最极端的情况下，关系模式的所有属性是这个关系模式的候选码，称为全码。</p>
+</li>
+<li><p>关系可以有三种类型：基本关系（基本表或基表）、查询表和视图表。基本表是实际存在的表，它是实际存储数据的逻辑表示；查询表示查询结果对应的表；视图表是由基本表或其他视图表导出的表，是虚表，不对应实际存储的数据。</p>
+</li>
+<li><p>在对关系进行限定和扩充下（为了适应数据库要求）：关系需要具有以下几个性质</p>
+<p> 1.列是同质的</p>
+<p> 2.不同的列可出自同一个域</p>
+<p> 3.列的顺序无所谓</p>
+<p> 4.任意两个元组的候选码不能取相同的值</p>
+<p> 5.行的顺序无所谓</p>
+<p> 6.分量必须取原子值</p>
+<p> 7.必须保证表中不能再有表</p>
+</li>
+<li><p>关系的描述称为关系模式（型），关系是关系模式在某一时刻的状态或内容（值）。关系模式是静态的、稳定的，而关系是动态的、随时间不断变化的。</p>
+</li>
+<li><p>关系数据库的型也称为关系数据库模式，是对关系数据库的描述。关系数据库的值是这些关系模式在某一时刻对应的关系的集合，通常就称为关系数据库。</p>
+</li>
+</ol>
+<h2 id="2-关系操作"><a href="#2-关系操作" class="headerlink" title="2. 关系操作"></a>2. 关系操作</h2><p>关系操作的对象和结果都是集合。基本操作：<strong>选择、投影、并、差、笛卡尔积</strong>(关系的<strong>基本操作</strong>)。分类：关系代数、关系演算、介于两者之间的结构化查询语言（SQL，SQL包含DDL的功能）。</p>
+<h2 id="3-关系的完整性"><a href="#3-关系的完整性" class="headerlink" title="3. 关系的完整性"></a>3. 关系的完整性</h2><ol>
+<li>实体完整性：若属性（指一个或一组属性）A是基本关系R的主属性，则A不能取空值。所谓空值就是“不知道”或“不存在”或”无意义“的值，即 <strong>A ！= NULL</strong>。</li>
+<li>参照完整性(即外键的概念)：设F是基本关系R的一个或一组属性，但不是关系R的码，<code>$ K_s $</code>是基本关系S的主码。如果F与<code>$ K_s $</code>相对应，则称F是R的外码，并称基本关系R为参照关系，基本关系S为被参照关系或目标关系。参照完整性规则：若属性（或属性组）F是基本关系R的外码，它与基本关系S的主码<code>$ K_s $</code>相对应，则对于R中每个元组在F上的值必须：或者取空值，或者等于S中某个元组的主码值。</li>
+</ol>
+<ol start="3">
+<li>用户定义的完整性：就是针对某一具体关系数据库的约束条件，它反映某一具体应用所涉及的数据必须满足的语义要求。</li>
+</ol>
+<p><strong>实体完整性和参照完整性是关系模型必须满足的完整性约束，被称作关系的两个不变性，应用由关系系统自动支持</strong>。</p>
+<h2 id="4-关系代数"><a href="#4-关系代数" class="headerlink" title="4. 关系代数"></a>4. 关系代数</h2><ul>
+<li>集合运算：并、交、差、笛卡尔积</li>
+<li><strong>关系运算：选择、投影、连接、除</strong>运算等</li>
+</ul>
+<ol>
+<li><p><strong>常用的关系运算符</strong> <del>栗子</del> (student,course)</p>
+<ol>
+<li>选择</li>
+</ol>
+<ul>
+<li><p>student中stuNo为001学生</p>
+<p>  <code>$\LARGE\sigma_{stuNo=&#39;001&#39;}(student)$</code></p>
+</li>
+<li><p>student中age&lt;20的学生</p>
+<p>  <code>$\LARGE\sigma_{Sage&lt;20}(student)$</code></p>
+</li>
+</ul>
+<ol start="2">
+<li>投影</li>
+</ol>
+<ul>
+<li><p>查询学生姓名与所在系</p>
+<p>  <code>$\LARGE\prod_{Sname,Sdept}(student)$</code></p>
+</li>
+<li><p>查询选修了ml课程的学生姓名</p>
+<p>  <code>$\LARGE\prod_{Sname}(\sigma_{Cname=&#39;ml&#39;}(course))$</code></p>
+</li>
+</ul>
+<p> 3.连接</p>
+<p> 常用的连接有等值连接，非等值连接(含有条件)，自连接，外连接，左外连接，右外连接。<br> <code>$\LARGE\bowtie$</code><br> <code>$\huge\rtimes$</code><br> <code>$\huge\ltimes$</code></p>
+<p> 4.除运算</p>
+<p> 引入概念象集：某个属性x在R关系中对应值域，用<code>$Y_x$</code>表示为x的象集，x= <code>$t_r [X]$</code><br> 设关系R除以关系S的结果为关系T，则T包含所有在R但不在S中的属性及其值，且T元组与S的元组的所有组合都在R中(为R的子集)。</p>
+</li>
+</ol>
+<pre><code>给出下面的例子：</code></pre><p>R<br>A | B| C<br> —|—|—<br><code>$a_1$</code> | <code>$b_1$</code> |<code>$c_2$</code><br><code>$a_2$</code> | <code>$b_3$</code> |<code>$c_7$</code><br><code>$a_3$</code> | <code>$b_4$</code> |<code>$c_6$</code><br><code>$a_1$</code> | <code>$b_2$</code> |<code>$c_3$</code><br><code>$a_4$</code> | <code>$b_6$</code> |<code>$c_6$</code><br><code>$a_2$</code> | <code>$b_2$</code> |<code>$c_3$</code><br><code>$a_1$</code> | <code>$b_2$</code> |<code>$c_1$</code><br>S<br>B | C| D<br> —|—|—<br><code>$b_1$</code> | <code>$c_2$</code> |<code>$d_1$</code><br><code>$b_2$</code> | <code>$c_1$</code> |<code>$d_1$</code><br><code>$b_2$</code> | <code>$c_3$</code> |<code>$d_2$</code><br>R中A的4个取值{<code>$a_1$</code>，<code>$a_2$</code>，<code>$a_3$</code>，<code>$a_4$</code>}<br>分别对应的象集为:</p>
+<p><code>$a_1$</code>:{(<code>$b_1$</code> ,<code>$c_2$</code>),(<code>$b_2$</code> ,<code>$c_3$</code>),(<code>$b_2$</code> ,<code>$c_1$</code>)}</p>
+<p><code>$a_2$</code>:{(<code>$b_3$</code> ,<code>$c_7$</code>),( <code>$b_2$</code> ,<code>$c_3$</code>)}</p>
+<p><code>$a_3$</code>:{(<code>$b_4$</code> ,<code>$c_6$</code>)}</p>
+<p><code>$a_4$</code>:{(<code>$b_6$</code> ,<code>$c_6$</code>)}</p>
+<p>S在(B,C)上的投影为{(<code>$b_1$</code> , <code>$c_2$</code>),(<code>$b_2$</code>, <code>$c_1$</code> ),(<code>$b_2$</code>, <code>$c_3$</code>)}</p>
+<p>容易看出<code>$a_1$</code>的象集包含了全部的S的投影，所以结果：</p>
+<p>R <code>$\div$</code> S<br>A|<br>—|<br><code>$a_1$</code>|</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/数据库-一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -441,175 +1304,6 @@
 </li>
 </ol>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/数据库知识总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lishuai">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lishuai's Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/29/数据库知识总结/" itemprop="url">数据库知识总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T19:08:31+08:00">
-                2019-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="sql-单表查询"><a href="#sql-单表查询" class="headerlink" title="sql 单表查询"></a>sql 单表查询</h2><h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><pre><code>    select 字段 from tablename where 字段 (not)in (元素1,2,3)；
-
-...  where 条件表达式1 and 条件表达式2；
-
-...  where 条件表达式1 or 条件表达式2；</code></pre><h3 id="范围查询"><a href="#范围查询" class="headerlink" title="范围查询"></a>范围查询</h3><pre><code>select 字段1，字段2  from tablename where 字段 (not) between x1 and x2</code></pre><h3 id="去重查询"><a href="#去重查询" class="headerlink" title="去重查询"></a>去重查询</h3><pre><code>select distinct 字段 from tablename</code></pre><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><pre><code>select 字段1，字段2 from tablename order by 属性名[ASC|DESC]</code></pre><h3 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h3><pre><code>group by 
-group_concat(字段名)//只是将符合条件的字段名拼接在一起</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-0cb6ecd1ac14baa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/582/format/webp" alt="picture:"><br>查找每个部门有多少名在职员工</p>
-<pre><code>SELECT
-      dept_no as 部门,
-      count( emp_no) as 人数
-    FROM
-      dept_emp 
-    WHERE
-      to_date = &apos;9999-01-01&apos; 
-    GROUP BY
-      dept_no</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-4b0feb5fca3be132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/228/format/webp" alt="picture"></p>
-<p>   having 相当于 对group by 的对象筛选(功能类似于where)</p>
-<p>每个部门人数都有了，那如果我们想要进一步知道员工人数大于30000的部门是哪些，这个时候就得用到HAVING了</p>
-<pre><code>SELECT
-      dept_no as 部门,
-      count(emp_no) as 人数
-    FROM
-      dept_emp 
-    WHERE
-      to_date = &apos;9999-01-01&apos; 
-    GROUP BY
-      dept_no
-    HAVING
-        count(emp_no)&gt;30000</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/8061266-81e50d2cd4263b65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/282/format/webp" alt="picture"></p>
-<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2>
           
         
       
@@ -974,7 +1668,7 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -996,7 +1690,7 @@ group_concat(字段名)//只是将符合条件的字段名拼接在一起</code>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

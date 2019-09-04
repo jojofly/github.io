@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库,关系运算,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关系数据库关系模型由关系数据结构、关系操作集合和关系完整性约束三部分组成。 1.关系结构$\longrightarrow$ 我们所说的表 域：域是一组具有相同数据类型的值的集合。  笛卡尔积：  在数学中，两个集合X和Y的笛卡尓积（Cartesian product），又称直积，表示为X × Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。   假设集合A={a, b}，集">
+<meta name="keywords" content="数据库,关系运算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库(二)">
+<meta property="og:url" content="http://yoursite.com/2019/09/03/数据库-二/index.html">
+<meta property="og:site_name" content="lishuai&#39;s Hexo">
+<meta property="og:description" content="关系数据库关系模型由关系数据结构、关系操作集合和关系完整性约束三部分组成。 1.关系结构$\longrightarrow$ 我们所说的表 域：域是一组具有相同数据类型的值的集合。  笛卡尔积：  在数学中，两个集合X和Y的笛卡尓积（Cartesian product），又称直积，表示为X × Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。   假设集合A={a, b}，集">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-03T12:13:06.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库(二)">
+<meta name="twitter:description" content="关系数据库关系模型由关系数据结构、关系操作集合和关系完整性约束三部分组成。 1.关系结构$\longrightarrow$ 我们所说的表 域：域是一组具有相同数据类型的值的集合。  笛卡尔积：  在数学中，两个集合X和Y的笛卡尓积（Cartesian product），又称直积，表示为X × Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。   假设集合A={a, b}，集">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/03/数据库-二/">
+
+
+
+
+
+  <title>数据库(二) | lishuai's Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lishuai's Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/数据库-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lishuai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lishuai's Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库(二)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-03T19:39:48+08:00">
+                2019-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h1><p>关系模型由关系数据结构、关系操作集合和关系完整性约束三部分组成。</p>
+<h2 id="1-关系结构-longrightarrow-我们所说的表"><a href="#1-关系结构-longrightarrow-我们所说的表" class="headerlink" title="1.关系结构$\longrightarrow$ 我们所说的表"></a>1.关系结构<code>$\longrightarrow$</code> 我们所说的表</h2><ol>
+<li><p>域：域是一组具有相同数据类型的值的集合。</p>
+</li>
+<li><p>笛卡尔积：</p>
+<blockquote>
+<p>在数学中，两个集合X和Y的笛卡尓积（Cartesian product），又称直积，表示为X × Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员。</p>
+</blockquote>
+<p> <strong>假设集合A={a, b}，集合B={0, 1, 2}，则两个集合的笛卡尔积为{(a, 0), (a, 1), (a, 2), (b, 0), (b, 1), (b, 2)}。</strong></p>
+<p> <strong>其中的每一个(x ，y)称为元组，每个x，y称为分量。基数(一个域允许的不同取值个数称为这个域的基数)对应的是当前域的基数，A集合含有两个不同的取值，A域的基数为2，B域的基数为3，A X B 的笛卡尔积可看作是一张表，共有元组 2 X 3 = 6 个元组</strong>。</p>
+<p> 关系是笛卡儿积的有限子集,比如在上述的6个元组中任选几个组成新的子集，就称作在域A,B上的关系。</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>若关系中的某一属性组的值能唯一地标识一个元组，而其子集不能，则称该属性组为候选码。</p>
+</li>
+<li><p>若一个关系有多个候选码，则选定其中一个为主码。</p>
+</li>
+<li><p>候选码的诸属性称为主属性。不包含在任何候选码中的属性称为非主属性或非码属性。</p>
+</li>
+<li><p>在最极端的情况下，关系模式的所有属性是这个关系模式的候选码，称为全码。</p>
+</li>
+<li><p>关系可以有三种类型：基本关系（基本表或基表）、查询表和视图表。基本表是实际存在的表，它是实际存储数据的逻辑表示；查询表示查询结果对应的表；视图表是由基本表或其他视图表导出的表，是虚表，不对应实际存储的数据。</p>
+</li>
+<li><p>在对关系进行限定和扩充下（为了适应数据库要求）：关系需要具有以下几个性质</p>
+<p> 1.列是同质的</p>
+<p> 2.不同的列可出自同一个域</p>
+<p> 3.列的顺序无所谓</p>
+<p> 4.任意两个元组的候选码不能取相同的值</p>
+<p> 5.行的顺序无所谓</p>
+<p> 6.分量必须取原子值</p>
+<p> 7.必须保证表中不能再有表</p>
+</li>
+<li><p>关系的描述称为关系模式（型），关系是关系模式在某一时刻的状态或内容（值）。关系模式是静态的、稳定的，而关系是动态的、随时间不断变化的。</p>
+</li>
+<li><p>关系数据库的型也称为关系数据库模式，是对关系数据库的描述。关系数据库的值是这些关系模式在某一时刻对应的关系的集合，通常就称为关系数据库。</p>
+</li>
+</ol>
+<h2 id="2-关系操作"><a href="#2-关系操作" class="headerlink" title="2. 关系操作"></a>2. 关系操作</h2><p>关系操作的对象和结果都是集合。基本操作：<strong>选择、投影、并、差、笛卡尔积</strong>(关系的<strong>基本操作</strong>)。分类：关系代数、关系演算、介于两者之间的结构化查询语言（SQL，SQL包含DDL的功能）。</p>
+<h2 id="3-关系的完整性"><a href="#3-关系的完整性" class="headerlink" title="3. 关系的完整性"></a>3. 关系的完整性</h2><ol>
+<li>实体完整性：若属性（指一个或一组属性）A是基本关系R的主属性，则A不能取空值。所谓空值就是“不知道”或“不存在”或”无意义“的值，即 <strong>A ！= NULL</strong>。</li>
+<li>参照完整性(即外键的概念)：设F是基本关系R的一个或一组属性，但不是关系R的码，<code>$ K_s $</code>是基本关系S的主码。如果F与<code>$ K_s $</code>相对应，则称F是R的外码，并称基本关系R为参照关系，基本关系S为被参照关系或目标关系。参照完整性规则：若属性（或属性组）F是基本关系R的外码，它与基本关系S的主码<code>$ K_s $</code>相对应，则对于R中每个元组在F上的值必须：或者取空值，或者等于S中某个元组的主码值。</li>
+</ol>
+<ol start="3">
+<li>用户定义的完整性：就是针对某一具体关系数据库的约束条件，它反映某一具体应用所涉及的数据必须满足的语义要求。</li>
+</ol>
+<p><strong>实体完整性和参照完整性是关系模型必须满足的完整性约束，被称作关系的两个不变性，应用由关系系统自动支持</strong>。</p>
+<h2 id="4-关系代数"><a href="#4-关系代数" class="headerlink" title="4. 关系代数"></a>4. 关系代数</h2><ul>
+<li>集合运算：并、交、差、笛卡尔积</li>
+<li><strong>关系运算：选择、投影、连接、除</strong>运算等</li>
+</ul>
+<ol>
+<li><p><strong>常用的关系运算符</strong> <del>栗子</del> (student,course)</p>
+<ol>
+<li>选择</li>
+</ol>
+<ul>
+<li><p>student中stuNo为001学生</p>
+<p>  <code>$\LARGE\sigma_{stuNo=&#39;001&#39;}(student)$</code></p>
+</li>
+<li><p>student中age&lt;20的学生</p>
+<p>  <code>$\LARGE\sigma_{Sage&lt;20}(student)$</code></p>
+</li>
+</ul>
+<ol start="2">
+<li>投影</li>
+</ol>
+<ul>
+<li><p>查询学生姓名与所在系</p>
+<p>  <code>$\LARGE\prod_{Sname,Sdept}(student)$</code></p>
+</li>
+<li><p>查询选修了ml课程的学生姓名</p>
+<p>  <code>$\LARGE\prod_{Sname}(\sigma_{Cname=&#39;ml&#39;}(course))$</code></p>
+</li>
+</ul>
+<p> 3.连接</p>
+<p> 常用的连接有等值连接，非等值连接(含有条件)，自连接，外连接，左外连接，右外连接。<br> <code>$\LARGE\bowtie$</code><br> <code>$\huge\rtimes$</code><br> <code>$\huge\ltimes$</code></p>
+<p> 4.除运算</p>
+<p> 引入概念象集：某个属性x在R关系中对应值域，用<code>$Y_x$</code>表示为x的象集，x= <code>$t_r [X]$</code><br> 设关系R除以关系S的结果为关系T，则T包含所有在R但不在S中的属性及其值，且T元组与S的元组的所有组合都在R中(为R的子集)。</p>
+</li>
+</ol>
+<pre><code>给出下面的例子：</code></pre><p>R<br>A | B| C<br> —|—|—<br><code>$a_1$</code> | <code>$b_1$</code> |<code>$c_2$</code><br><code>$a_2$</code> | <code>$b_3$</code> |<code>$c_7$</code><br><code>$a_3$</code> | <code>$b_4$</code> |<code>$c_6$</code><br><code>$a_1$</code> | <code>$b_2$</code> |<code>$c_3$</code><br><code>$a_4$</code> | <code>$b_6$</code> |<code>$c_6$</code><br><code>$a_2$</code> | <code>$b_2$</code> |<code>$c_3$</code><br><code>$a_1$</code> | <code>$b_2$</code> |<code>$c_1$</code><br>S<br>B | C| D<br> —|—|—<br><code>$b_1$</code> | <code>$c_2$</code> |<code>$d_1$</code><br><code>$b_2$</code> | <code>$c_1$</code> |<code>$d_1$</code><br><code>$b_2$</code> | <code>$c_3$</code> |<code>$d_2$</code><br>R中A的4个取值{<code>$a_1$</code>，<code>$a_2$</code>，<code>$a_3$</code>，<code>$a_4$</code>}<br>分别对应的象集为:</p>
+<p><code>$a_1$</code>:{(<code>$b_1$</code> ,<code>$c_2$</code>),(<code>$b_2$</code> ,<code>$c_3$</code>),(<code>$b_2$</code> ,<code>$c_1$</code>)}</p>
+<p><code>$a_2$</code>:{(<code>$b_3$</code> ,<code>$c_7$</code>),( <code>$b_2$</code> ,<code>$c_3$</code>)}</p>
+<p><code>$a_3$</code>:{(<code>$b_4$</code> ,<code>$c_6$</code>)}</p>
+<p><code>$a_4$</code>:{(<code>$b_6$</code> ,<code>$c_6$</code>)}</p>
+<p>S在(B,C)上的投影为{(<code>$b_1$</code> , <code>$c_2$</code>),(<code>$b_2$</code>, <code>$c_1$</code> ),(<code>$b_2$</code>, <code>$c_3$</code>)}</p>
+<p>容易看出<code>$a_1$</code>的象集包含了全部的S的投影，所以结果：</p>
+<p>R <code>$\div$</code> S<br>A|<br>—|<br><code>$a_1$</code>|</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/tags/关系运算/" rel="tag"># 关系运算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/03/数据库-一/" rel="next" title="数据库(一)">
+                <i class="fa fa-chevron-left"></i> 数据库(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/03/数据库-三/" rel="prev" title="数据库(三)">
+                数据库(三) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lishuai</p>
+              <p class="site-description motion-element" itemprop="description">用来记录学习，记录生活</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关系数据库"><span class="nav-number">1.</span> <span class="nav-text">关系数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-关系结构-longrightarrow-我们所说的表"><span class="nav-number">1.1.</span> <span class="nav-text">1.关系结构$\longrightarrow$ 我们所说的表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-关系操作"><span class="nav-number">1.2.</span> <span class="nav-text">2. 关系操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-关系的完整性"><span class="nav-number">1.3.</span> <span class="nav-text">3. 关系的完整性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-关系代数"><span class="nav-number">1.4.</span> <span class="nav-text">4. 关系代数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lishuai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
